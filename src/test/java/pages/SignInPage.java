@@ -2,6 +2,7 @@ package pages;
 
 import base.BasePage;
 import org.openqa.selenium.WebDriver;
+import utils.UserData;
 
 public class SignInPage extends BasePage {
     private final String EMAIL_INPUT_FIELD = "//input[@type='email']";
@@ -22,7 +23,13 @@ public class SignInPage extends BasePage {
         return this;
     }
 
-    public void SignIn() {
+    public void signIn() {
         waitUntilElementToBeClickable(SIGN_IN_BUTTON).click();
+    }
+
+    public void ComplateSignIn() {
+        setEmail(UserData.USER_EMAIL);
+        setPassword(UserData.USER_PASSWORD);
+        signIn();
     }
 }

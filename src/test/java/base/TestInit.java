@@ -18,12 +18,6 @@ public class TestInit {
         driver = new ChromeDriver();
         driver.get(BASE_URL);
         driver.manage().window().maximize();
-        HeaderComponent headerComponent = new HeaderComponent(driver);
-        headerComponent.goSignInMenu()
-                .goSignInWithZappos()
-                .setEmail(UserData.USER_EMAIL)
-                .setPassword(UserData.USER_PASSWORD)
-                .SignIn();
     }
 
     @AfterMethod
