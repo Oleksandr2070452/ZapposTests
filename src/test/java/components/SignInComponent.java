@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import pages.SignInPage;
 
 public class SignInComponent extends BasePage {
-    private final String SIGN_WITH_ZAPPOS = "//div[@class='Gm-z']/a[contains(text(),'Sign in with Zappos')]";
+    private final String SIGN_WITH_ZAPPOS = "//a[@id='zapposSignIn']";
 
     public SignInComponent(WebDriver driver) {
         super(driver);
