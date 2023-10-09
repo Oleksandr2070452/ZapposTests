@@ -25,4 +25,9 @@ public class SignInPage extends BasePage {
     public void SignIn() {
         waitUntilElementToBeClickable(SIGN_IN_BUTTON).click();
     }
+
+    public SignInPage clickSignInBtn() {
+        waitUntilElementToBeClickable(SIGN_IN_BUTTON).click();
+        return this;
+    }
 }
