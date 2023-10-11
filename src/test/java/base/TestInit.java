@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.Set;
+
 public class TestInit {
 
     protected static WebDriver driver;
@@ -26,4 +28,22 @@ public class TestInit {
     public void navigateGoBack() {
         driver.navigate().back();
     }
+
+    public void switchToTheNextWindow() {
+        String originalWindowHandle = driver.getWindowHandle();
+
+        Set<String> allWindowHandles = driver.getWindowHandles();
+
+        for (String windowHandle : allWindowHandles) {
+            if (!windowHandle.equals(originalWindowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+    }
+    public String getUrl() {
+        return driver.getCurrentUrl();
+    }
+
+
 }
