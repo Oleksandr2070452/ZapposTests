@@ -8,22 +8,22 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SaleDropdown extends BasePage {
-    public SaleDropdown(WebDriver driver) {
+public class SaleDropdownPage extends BasePage {
+    public SaleDropdownPage(WebDriver driver) {
         super(driver);
     }
 
     private final String TITLE_SALE = "//a[@href='/sale']";
-    private final String SALE_SUBCATEGORIES = "//div[@class='pi-z']//a[contains(@data-hfsubnav,'navSale')]";
+    private final String SALE_SUBCATEGORIES = "//div[@data-headercategory='navSale']//div[@class='pi-z']//a[@data-hfsubnav]";
 
     private final String TITLE_BROOKS = "//a[text()='Brands on Sale']/following-sibling::ul//a[contains(@href,'brooks-sneakers-athletic-shoes')]";
     private final String SELECTIONS = "//div[@id='products']/article";
-    private final String FIRST_PRODUCT ="//a[@data-style-id='5503631']";
-    private final String ORIGINAL_PRICE ="//span[@class='Ts-z Us-z']";
-    private final String SALE_PRICE ="//span//span[@aria-hidden='true']";
+    private final String FIRST_PRODUCT = "//a[@data-style-id='5503631']";
+    private final String ORIGINAL_PRICE = "//abbr/../following-sibling::span";
+    private final String SALE_PRICE = "//span[@aria-label and @itemprop]/span[@aria-hidden]";
 
 
-    public SaleDropdown saleDropdownClick() {
+    public SaleDropdownPage saleDropdownClick() {
         waitUntilElementToBeClickable(TITLE_SALE).click();
         return this;
     }
@@ -37,7 +37,7 @@ public class SaleDropdown extends BasePage {
         return saleCategoriesNames;
     }
 
-    public SaleDropdown brookClick() {
+    public SaleDropdownPage brookClick() {
         waitUntilVisibilityOfElement(TITLE_BROOKS).click();
         return this;
     }
@@ -50,15 +50,31 @@ public class SaleDropdown extends BasePage {
         }
         return saleSelectionNames;
     }
-    public SaleDropdown firstProductClick(){
+
+    public SaleDropdownPage firstProductClick() {
         waitUntilElementToBeClickable(FIRST_PRODUCT).click();
         return this;
     }
 
+    public boolean check() {
+        WebElement salePriceElement = waitUntilVisibilityOfElement(SALE_PRICE);
+        WebElement originalPriceElement = waitUntilVisibilityOfElement(ORIGINAL_PRICE);
 
+        String salePriceText = salePriceElement.getText();
+        String originalPriceText = originalPriceElement.getText();
+
+        double salePrice = Double.parseDouble(salePriceText.replaceAll("[^\\d.]+", ""));
+        double originalPrice = Double.parseDouble(originalPriceText.replaceAll("[^\\d.]+", ""));
+        System.out.println("Sale price: " + salePrice);
+        System.out.println("Original price: " + originalPrice);
+
+        if (salePrice < originalPrice) {
+            return true;
+        } else {
+            return false;
+        }
     }
-
-
+}
 
 
 
