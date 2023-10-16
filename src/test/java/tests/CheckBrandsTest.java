@@ -5,7 +5,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 
-import java.util.Locale;
+
 
 public class CheckBrandsTest extends TestInit {
 
